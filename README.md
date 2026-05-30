@@ -1,61 +1,164 @@
-LeNet-5 Handwritten Digit Recognizer
-A simple Streamlit web app that uses the LeNet-5 CNN architecture to recognize handwritten digits drawn by the user in real time.
+<div align="center">
 
-Demo:
-Try it live (after deployment): [https://lenet-5-zedlezgpachnhzcn4po5ld.streamlit.app/]
+# 🧠 LeNet-5 Handwritten Digit Recognizer
 
-Features:
+**A real-time digit recognition web app powered by the classic LeNet-5 CNN architecture**
 
-Interactive canvas to draw digits (0–9)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![MNIST](https://img.shields.io/badge/Dataset-MNIST-brightgreen?style=for-the-badge)](http://yann.lecun.com/exdb/mnist/)
 
-Real-time prediction using a trained LeNet-5 PyTorch model
+🚀 **[Try it Live →](https://lenet-5-zedlezgpachnhzcn4po5ld.streamlit.app/)**
 
-Clean and responsive Streamlit interface
+</div>
 
-Easy to modify and retrain with your own dataset
+---
 
-Tech Stack:
+## ✨ What It Does
 
-Frontend: Streamlit, streamlit-drawable-canvas
+Draw any digit (0–9) on the interactive canvas and watch the trained LeNet-5 model predict it in **real time**. No setup needed — just open the app and start drawing!
 
-Backend: PyTorch, NumPy, PIL
+---
 
-Model: LeNet-5 architecture trained on MNIST dataset
+## 🏗️ Architecture
 
-How to Run Locally:
+LeNet-5 is one of the pioneering convolutional neural networks, introduced by Yann LeCun et al. This implementation uses a modernized variant with **Batch Normalization** and **ReLU activations**.
 
-Clone the repository:
-git clone https://github.com/your-username/lenet5-digit-recognizer.git
-cd lenet5-digit-recognizer
+```
+Input (1×32×32)
+     │
+     ▼
+┌─────────────────────────────┐
+│  Layer 1 — Conv Block       │
+│  Conv2d(1→6, 5×5)           │
+│  BatchNorm → ReLU           │
+│  MaxPool(2×2)               │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│  Layer 2 — Conv Block       │
+│  Conv2d(6→16, 5×5)          │
+│  BatchNorm → ReLU           │
+│  MaxPool(2×2)               │
+└──────────────┬──────────────┘
+               │
+               ▼
+         Flatten (400)
+               │
+     ┌─────────┴─────────┐
+     │  FC: 400 → 120    │
+     │       ReLU        │
+     │  FC: 120 → 84     │
+     │       ReLU        │
+     │  FC:  84 → 10     │
+     └─────────┬─────────┘
+               │
+               ▼
+       Output (10 classes)
+```
 
-Install dependencies (use a virtual environment if needed):
+| Layer | Type | Output Shape |
+|-------|------|-------------|
+| Input | — | `1 × 32 × 32` |
+| Layer 1 | Conv + BN + ReLU + Pool | `6 × 14 × 14` |
+| Layer 2 | Conv + BN + ReLU + Pool | `16 × 5 × 5` |
+| Flatten | — | `400` |
+| FC1 | Linear + ReLU | `120` |
+| FC2 | Linear + ReLU | `84` |
+| FC3 | Linear | `10` |
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| 🖥️ Frontend | Streamlit + streamlit-drawable-canvas |
+| 🤖 Model | PyTorch (LeNet-5) |
+| 🔢 Dataset | MNIST Handwritten Digits |
+| 🖼️ Image Processing | PIL + NumPy |
+
+---
+
+## 🚀 Run Locally
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/marbo786/LENET-5.git
+cd LENET-5
+```
+
+**2. Install dependencies**
+```bash
 pip install -r requirements.txt
+```
 
-Run the app:
+**3. Launch the app**
+```bash
 streamlit run app.py
+```
 
-Project Structure:
+> 💡 The trained weights (`lenet5_mnist.pth`) are included — no retraining needed!
 
-app.py → Streamlit app interface
+---
 
-model.py → LeNet5 model definition
+## 📁 Project Structure
 
-lenet5_mnist.pth → Trained model weights
+```
+LENET-5/
+├── app.py               # Streamlit web interface + prediction logic
+├── model.py             # LeNet-5 architecture definition (PyTorch)
+├── lenet5_mnist.pth     # Pre-trained model weights (MNIST)
+├── requirements.txt     # Python dependencies
+└── README.md            # Project documentation
+```
 
-requirements.txt → Python dependencies
+---
 
-README.md → Project overview
+## 🎮 How to Use
 
-Credits:
+1. **Open the app** in your browser
+2. **Draw a digit** (0–9) on the black canvas using your mouse
+3. **See the prediction** appear instantly below the canvas
+4. **Clear** the canvas and try another digit!
 
-Model inspired by LeCun et al.'s LeNet-5
+---
 
-Dataset: MNIST Handwritten Digits
+## 📦 Requirements
 
-Built with love using Streamlit and PyTorch
+```
+torch
+torchvision
+streamlit
+streamlit-drawable-canvas
+Pillow
+numpy
+```
 
-Contact:
+---
 
-Developer: [MOHSIN SAEED]
-Email: marboo786@gmail.com
+## 📚 Background
 
+LeNet-5 was originally proposed by **Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner** in their landmark 1998 paper *"Gradient-Based Learning Applied to Document Recognition"*. It was one of the first CNNs to demonstrate the power of end-to-end learning for image classification, achieving near-human accuracy on MNIST.
+
+This implementation modernizes the original by replacing sigmoid activations with **ReLU** and adding **Batch Normalization** for faster, more stable training.
+
+---
+
+## 👤 Author
+
+**Mohsin Saeed**
+📧 [marboo786@gmail.com](mailto:marboo786@gmail.com)
+🐙 [github.com/marbo786](https://github.com/marbo786)
+
+---
+
+<div align="center">
+
+Built with ❤️ using PyTorch & Streamlit
+
+⭐ If you found this useful, please consider starring the repo!
+
+</div>
