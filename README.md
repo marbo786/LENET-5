@@ -2,7 +2,7 @@
 
 # 🧠 LeNet-5 Handwritten Digit Recognizer
 
-**A real-time digit recognition web app powered by the classic LeNet-5 CNN architecture**
+**A interactive digit recognition web app powered by the classic LeNet-5 CNN architecture**
 
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
@@ -17,7 +17,7 @@
 
 ## ✨ What It Does
 
-Draw any digit (0–9) on the interactive canvas and watch the trained LeNet-5 model predict it in **real time**. No setup needed — just open the app and start drawing!
+Draw any digit (0–9) on the interactive canvas and watch the trained LeNet-5 model predict it when you select **Predict Digit**. No setup needed — just open the app and start drawing!
 
 ---
 
@@ -82,28 +82,6 @@ Input (1×32×32)
 
 ---
 
-## 🚀 Run Locally
-
-**1. Clone the repository**
-```bash
-git clone https://github.com/marbo786/LENET-5.git
-cd LENET-5
-```
-
-**2. Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-**3. Launch the app**
-```bash
-streamlit run app.py
-```
-
-> 💡 The trained weights (`lenet5_mnist.pth`) are included — no retraining needed!
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -121,21 +99,8 @@ LENET-5/
 
 1. **Open the app** in your browser
 2. **Draw a digit** (0–9) on the black canvas using your mouse
-3. **See the prediction** appear instantly below the canvas
+3. **Select Predict Digit** to see the predicted class and confidence
 4. **Clear** the canvas and try another digit!
-
----
-
-## 📦 Requirements
-
-```
-torch
-torchvision
-streamlit
-streamlit-drawable-canvas
-Pillow
-numpy
-```
 
 ---
 

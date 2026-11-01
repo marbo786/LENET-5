@@ -1,5 +1,7 @@
 import streamlit as st
 from model import LeNet5
+from canvas_utils import canvas_image_data
+from pathlib import Path
 import torch
 import torch.nn.functional as F
 from torchvision import transforms
@@ -15,7 +17,7 @@ st.set_page_config(page_title="Digit Classifier", page_icon="✍️", layout="ce
 @st.cache_resource
 def load_model():
     model = LeNet5(num_classes=10)
-    model.load_state_dict(torch.load("lenet5_mnist.pth", map_location=torch.device("cpu")))
+    model.load_state_dict(torch.load(Path(__file__).with_name("lenet5_mnist.pth"), map_location=torch.device("cpu"), weights_only=True))
     model.eval()
     return model
 
@@ -64,8 +66,9 @@ canvas_result = st_canvas(
     key="canvas"
 )
 
-if canvas_result.image_data is not None:
-    drawn_img = Image.fromarray((canvas_result.image_data[:, :, 0]).astype("uint8"))
+canvas_data = canvas_image_data(canvas_result)
+if canvas_data is not None:
+    drawn_img = Image.fromarray((canvas_data[:, :, 0]).astype("uint8"))
     if drawn_img.getbbox():
         image = drawn_img.resize((28, 28))
         st.image(image, caption="Drawn Digit", width=150)
